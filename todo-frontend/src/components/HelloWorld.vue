@@ -3,17 +3,17 @@
     <h1>Selamat Datang</h1>
     <div>Berikut daftar kerja kita : </div>
     <ul>
-      <li v-for="item in todos" :key="item">{{item.nama}}<button @click ="deleteTodo(item.nama)">-</button></li> 
+      <li v-for="item in todos" :key="item">{{item.nama}}<button @click ="deleteTodos(item.nama)">-</button></li> 
     </ul>
     <input v-model="myText" type="text"/>
-    <button @click="addTodos">Add Data</button>
+    <button @click="addTodos">Add</button>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   export default {
-    data:()=>{
+    data: () => {
       return {
         todos: [],
         myText:''
@@ -34,11 +34,11 @@
         axios.post('http://localhost:3000/todo', addItem)
         this.todos.push(addItem)
       },
-      deleteTodo(nama){
+      deleteTodos(nama){
         axios.delete(`http://localhost:3000/todo/${nama}`)
           .then(() => {
             this.getTodos()
-        })
+          })
       }
     }
   }
