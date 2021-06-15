@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Selamat Datang</h1>
-    <div>Berikut daftar kerja kita : </div>
+    <h1>Database</h1>
+    <div>List To-Do </div>
     <ul>
-      <li v-for="item in todos" :key="item">{{item.nama}}<button @click ="deleteTodos(item.nama)">-</button></li> 
+      <li v-for="item in todos" :key="item">{{item.deskripsi}}<button @click ="deleteTodos(item.deskripsi)">-</button></li> 
     </ul>
     <input v-model="myText" type="text"/>
     <button @click="addTodos">Add</button>
@@ -24,18 +24,20 @@
     },
     methods: {
       getTodos(){
-        axios.get('http://localhost:3000/todo')
+        const username = localStorage.getItem('usr')
+        const password = localStorage.getItem('pwd')
+        axios.get('http://localhost:3000/todo', {header:{username, password}})
         .then(result => {
           this.todos = result.data
         })
       },
       addTodos(){
-        let addItem = {nama: this.myText}
-        axios.post('http://localhost:3000/todo', addItem)
+        let addItem = {deskripsi: this.myText}
+        axios.post('http://localhost:3000/todo', addItem,  {header:{username, password}})
         this.todos.push(addItem)
       },
-      deleteTodos(nama){
-        axios.delete(`http://localhost:3000/todo/${nama}`)
+      deleteTodos(deskripsi){
+        axios.delete(`http://localhost:3000/todo/${deskripsi}`)
           .then(() => {
             this.getTodos()
           })
