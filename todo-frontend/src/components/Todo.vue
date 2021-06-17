@@ -26,18 +26,22 @@
       getTodos(){
         const username = localStorage.getItem('usr')
         const password = localStorage.getItem('pwd')
-        axios.get('http://localhost:3000/todo', {header:{username, password}})
+        axios.get('http://localhost:3000/todos', {header:{username, password}} )
         .then(result => {
           this.todos = result.data
         })
       },
       addTodos(){
+        const username = localStorage.getItem('usr')
+        const password = localStorage.getItem('pwd')
         let addItem = {deskripsi: this.myText}
-        axios.post('http://localhost:3000/todo', addItem,  {header:{username, password}})
+        axios.post('http://localhost:3000/todo', addItem,  {header:{username, password}} )
         this.todos.push(addItem)
       },
       deleteTodos(deskripsi){
-        axios.delete(`http://localhost:3000/todo/${deskripsi}`)
+        const username = localStorage.getItem('usr')
+        const password = localStorage.getItem('pwd')
+        axios.delete(`http://localhost:3000/todo/${deskripsi}`, {header:{username, password}} )
           .then(() => {
             this.getTodos()
           })
