@@ -26,7 +26,7 @@
       getTodos(){
         const username = localStorage.getItem('usr')
         const password = localStorage.getItem('pwd')
-        axios.get('http://localhost:3000/todos', {header:{username, password}} )
+        axios.get('http://localhost:3000/todo', {header:{username, password}} )
         .then(result => {
           this.todos = result.data
         })

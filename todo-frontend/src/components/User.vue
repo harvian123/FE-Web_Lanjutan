@@ -37,9 +37,9 @@
       addUsers(){
         const username = localStorage.getItem('usr')
         const password = localStorage.getItem('pwd')
-        let addItem = {username : this.username, password : this.password}
+        let addUser = {username : this.username, password : this.password}
         axios.post('http://localhost:3000/user', addItem, {header: {username , password}})
-        this.users.push(addItem)
+        this.users.push(addUser)
       },
       deleteUsers(id){
         axios.delete(`http://localhost:3000/user/${id}`)
