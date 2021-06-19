@@ -6,6 +6,7 @@
       <li v-for="item in users" :key="item">{{item.username}}<button @click ="deleteUsers(item.id)">-</button></li> 
     </ul>
     <input v-model="username"/>
+	<br/>
     <input v-model="password"/>
     <br/>
     <button @click="addUsers">Add Data</button>
